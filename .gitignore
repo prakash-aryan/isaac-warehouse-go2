@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+assets/
+policies/
+logs/
+nav/params/
+warehouse*.usda
+warehouse*_layout.json
+warehouse*_goals.json
+nav_log*.json
+nav_patrol*.log

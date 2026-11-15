@@ -1,0 +1,2700 @@
+{
+ "modular_warehouse_h10m_straight_a04": {
+  "usd": "modular_warehouse_h10m_straight_a04/simready_usd/sm_modular_warehouse_h10m_straight_a04_01.usda",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.000020980834961,
+   -10.000077247619629,
+   0.0
+  ],
+  "max": [
+   10.000127792358398,
+   0.00012874603271484375,
+   12.300000190734863
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Disabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "modular_warehouse_h10m_straight_90_a04": {
+  "usd": "modular_warehouse_h10m_straight_90_a04/simready_usd/sm_modular_warehouse_h10m_straight_90_a04_01.usda",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -4.005432129203125e-05,
+   -10.000000089406962,
+   -1.3000017404556274
+  ],
+  "max": [
+   10.000095367431637,
+   1.0001143515110065,
+   10.999999403953552
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Disabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "modular_warehouse_h10m_corner_in_a01": {
+  "usd": "modular_warehouse_h10m_corner_in_a01/simready_usd/sm_modular_warehouse_h10m_corner_in_a01_01.usda",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.9999945163726807,
+   -10.000067710876465,
+   0.0
+  ],
+  "max": [
+   10.000085830688477,
+   0.999803900718689,
+   12.300004005432129
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Disabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "modular_warehouse_h10m_corner_out_a01": {
+  "usd": "modular_warehouse_h10m_corner_out_a01/simready_usd/sm_modular_warehouse_h10m_corner_out_a01_01.usda",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.00010776519775390625,
+   -10.000191688537598,
+   -1.2999993562698364
+  ],
+  "max": [
+   20.000118255615234,
+   10.000061988830566,
+   11.0
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Disabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "modular_warehouse_h10m_center_a01": {
+  "usd": "modular_warehouse_h10m_center_a01/simready_usd/sm_modular_warehouse_h10m_center_a01_01.usda",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -3.9577484130859375e-05,
+   -10.00015640258789,
+   -1.2999999523162842
+  ],
+  "max": [
+   10.000116348266602,
+   0.00013780593872070312,
+   10.29999828338623
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Disabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "warehouse_h10m_straight_a04": {
+  "usd": "warehouse_h10m_straight_a04/simready_usd/sm_warehouse_h10m_straight_a04_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.000020980834961,
+   -10.031346321105957,
+   0.0
+  ],
+  "max": [
+   10.000127792358398,
+   0.00012874603271484375,
+   12.300000190734863
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 3,
+  "colliders": 0,
+  "mass": null
+ },
+ "environment_floor_a01": {
+  "usd": "environment_floor_a01/simready_usd/sm_environment_floor_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -3.000000238418579,
+   -3.000000238418579,
+   1.5133991837501526e-09
+  ],
+  "max": [
+   3.000000238418579,
+   3.000000238418579,
+   0.10000818967819214
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": 25414.630859375
+ },
+ "grid_ceiling_a01": {
+  "usd": "grid_ceiling_a01/simready_usd/sm_grid_ceiling_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.49998754262924194,
+   -0.08428986370563507,
+   0.0001701554279064637
+  ],
+  "max": [
+   0.49998894333839417,
+   0.08373318612575531,
+   0.00975857450022191
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "structure_wall_column_a01": {
+  "usd": "structure_wall_column_a01/simready_usd/sm_structure_wall_column_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.36849966645240784,
+   -0.36850035190582275,
+   0.0
+  ],
+  "max": [
+   0.36850103735923767,
+   0.36850035190582275,
+   8.49918270111084
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": 7619.79541015625
+ },
+ "lighting_overheadLed_rectangularFrame_a01": {
+  "usd": "lighting_overheadLed_rectangularFrame_a01/simready_usd/sm_lighting_overheadLed_rectangularFrame_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.2000000476837158,
+   -2.3999998569488525,
+   9.804964065551758e-06
+  ],
+  "max": [
+   1.2000000476837158,
+   2.4000000953674316,
+   1.0559120178222656
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": 135.85292053222656
+ },
+ "lighting_overheadLed_lightPanel_a01": {
+  "usd": "lighting_overheadLed_lightPanel_a01/simready_usd/sm_lighting_overheadLed_lightPanel_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -3.000000476837158,
+   -1.7999999523162842,
+   -1.4553035497665405
+  ],
+  "max": [
+   2.999999523162842,
+   1.7999999523162842,
+   1.6689300537109375e-06
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": 614.5216064453125
+ },
+ "ventilation_ceilingFan_hvls_a01": {
+  "usd": "ventilation_ceilingFan_hvls_a01/simready_usd/sm_ventilation_ceilingFan_hvls_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -3.048205136810199,
+   -2.9309904572120544,
+   -1.8408208291020856e-10
+  ],
+  "max": [
+   2.549354553665265,
+   2.9129192832359436,
+   1.2985599039144287
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 2,
+  "colliders": 0,
+  "mass": 46.83807373046875
+ },
+ "rack_composition_a04": {
+  "usd": "rack_composition_a04/simready_usd/sm_rack_composition_a04_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.2261441946029663,
+   -0.6660833423168354,
+   0.0
+  ],
+  "max": [
+   1.2283507585525513,
+   0.6427674740565027,
+   3.7288763524901123
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 16,
+  "colliders": 0,
+  "mass": null
+ },
+ "rack_composition_a05": {
+  "usd": "rack_composition_a05/simready_usd/sm_rack_composition_a05_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.2261441946029663,
+   -0.6225354551361963,
+   0.0
+  ],
+  "max": [
+   1.2283507585525513,
+   0.6629815697672131,
+   3.604377370345764
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 9,
+  "colliders": 0,
+  "mass": null
+ },
+ "rack_composition_a06": {
+  "usd": "rack_composition_a06/simready_usd/sm_rack_composition_a06_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.2261441946029663,
+   -0.6754565797740417,
+   0.0
+  ],
+  "max": [
+   1.2283507585525513,
+   0.6256627477727478,
+   4.021889328600037
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 8,
+  "colliders": 0,
+  "mass": null
+ },
+ "rack_composition_a08": {
+  "usd": "rack_composition_a08/simready_usd/sm_rack_composition_a08_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.2272474765777588,
+   -0.6130044413709912,
+   0.0
+  ],
+  "max": [
+   1.2272474765777588,
+   0.6129828691482544,
+   3.112409124451183
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 11,
+  "colliders": 0,
+  "mass": null
+ },
+ "rack_composition_l03": {
+  "usd": "rack_composition_l03/simready_usd/sm_rack_composition_l03_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.5500011444091797,
+   -0.35000044107437134,
+   0.0
+  ],
+  "max": [
+   1.5500011444091797,
+   0.3499999940395355,
+   2.7491433620374757
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 17,
+  "colliders": 0,
+  "mass": 1111.2322998046875
+ },
+ "rack_composition_l05": {
+  "usd": "rack_composition_l05/simready_usd/sm_rack_composition_l05_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.5500011444091797,
+   -0.35000044107437134,
+   0.0
+  ],
+  "max": [
+   1.5500011444091797,
+   0.3499999940395355,
+   2.732582717921768
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 17,
+  "colliders": 0,
+  "mass": null
+ },
+ "rack_composition_l07": {
+  "usd": "rack_composition_l07/simready_usd/sm_rack_composition_l07_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.5499999523162842,
+   -0.6499999761581421,
+   0.0
+  ],
+  "max": [
+   1.5499999523162842,
+   0.6500005722045898,
+   2.74914216994458
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 33,
+  "colliders": 0,
+  "mass": null
+ },
+ "rack_large_empty_a01": {
+  "usd": "rack_large_empty_a01/simready_usd/sm_rack_large_empty_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.9999884366989136,
+   -1.0332903861999512,
+   0.0
+  ],
+  "max": [
+   1.9999887943267822,
+   1.0332906246185303,
+   3.010000705718994
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "rack_long_empty_a01": {
+  "usd": "rack_long_empty_a01/simready_usd/sm_rack_long_empty_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.9999884366989136,
+   -0.5402435660362244,
+   0.0
+  ],
+  "max": [
+   1.9999865293502808,
+   0.5402432680130005,
+   3.010000705718994
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "storageSystem_rack_heavyDuty_d01": {
+  "usd": "storageSystem_rack_heavyDuty_d01/simready_usd/sm_storageSystem_rack_heavyDuty_d01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.5576466917991638,
+   -0.8949815034866332,
+   3.03145619979725e-07
+  ],
+  "max": [
+   0.5576467514038086,
+   0.8578871488571168,
+   1.4887972264551845
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "shelve_steel_heavyDuty_a06": {
+  "usd": "shelve_steel_heavyDuty_a06/simready_usd/sm_shelve_steel_heavyDuty_a06_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.45980650186538696,
+   -0.3074047863483429,
+   0.0
+  ],
+  "max": [
+   0.45980650186538696,
+   0.3074047863483429,
+   2.4383909702301025
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "rack_bulk_storage_a03": {
+  "usd": "rack_bulk_storage_a03/simready_usd/sm_rack_bulk_storage_a03_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.2272474765777588,
+   -0.6129826903343201,
+   0.0
+  ],
+  "max": [
+   1.2272474765777588,
+   0.6129823923110962,
+   2.4311094284057617
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_assembly_a02": {
+  "usd": "pallet_assembly_a02/simready_usd/sm_pallet_assembly_a02_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.45068755745887756,
+   -0.4517558813095093,
+   0.0
+  ],
+  "max": [
+   0.45068755745887756,
+   0.4517558217048645,
+   0.5052246451377869
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_assembly_a05": {
+  "usd": "pallet_assembly_a05/simready_usd/sm_pallet_assembly_a05_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.46040037274360657,
+   -0.45528703927993774,
+   0.0
+  ],
+  "max": [
+   0.46005502343177795,
+   0.4730776846408844,
+   1.0446033477783203
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_assembly_b01": {
+  "usd": "pallet_assembly_b01/simready_usd/sm_pallet_assembly_b01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.6640095114707947,
+   -0.5561516284942627,
+   1.19209286886246e-09
+  ],
+  "max": [
+   0.6663527488708496,
+   0.558148205280304,
+   0.5590456128120422
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_assembly_c01": {
+  "usd": "pallet_assembly_c01/simready_usd/sm_pallet_assembly_c01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.5657833218574524,
+   -0.6594825983047485,
+   3.40103332706939e-06
+  ],
+  "max": [
+   0.564355731010437,
+   0.6558889746665955,
+   0.8568717877117247
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_assembly_d01": {
+  "usd": "pallet_assembly_d01/simready_usd/sm_pallet_assembly_d01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.5781672745943889,
+   -0.6750585961272008,
+   -1.5332041192195334e-11
+  ],
+  "max": [
+   0.5725220292805806,
+   0.6822614145348781,
+   1.204622507080005
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_assembly_red_a01": {
+  "usd": "pallet_assembly_red_a01/simready_usd/sm_pallet_assembly_red_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.33685821294784546,
+   -0.33122900128364563,
+   1.19209286886246e-09
+  ],
+  "max": [
+   0.3283509314060211,
+   0.3289729356765747,
+   0.5001038908958435
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 2,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_assembly_yellow_a01": {
+  "usd": "pallet_assembly_yellow_a01/simready_usd/sm_pallet_assembly_yellow_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.33685821294784546,
+   -0.33122900128364563,
+   1.19209286886246e-09
+  ],
+  "max": [
+   0.3283509314060211,
+   0.3289729356765747,
+   0.5001038908958435
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 2,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_assembly_transparent_a01": {
+  "usd": "pallet_assembly_transparent_a01/simready_usd/sm_pallet_assembly_transparent_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.33685821294784546,
+   -0.33122900128364563,
+   1.19209286886246e-09
+  ],
+  "max": [
+   0.3283509314060211,
+   0.3289729356765747,
+   0.5001038908958435
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 2,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_a01": {
+  "usd": "pallet_a01/simready_usd/sm_pallet_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.6021009087562561,
+   -0.40019288659095764,
+   0.0
+  ],
+  "max": [
+   0.6021009087562561,
+   0.40019288659095764,
+   0.20864565670490265
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "pallet_block_a01": {
+  "usd": "pallet_block_a01/simready_usd/sm_pallet_block_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.49995273351669306,
+   -0.6000926099515684,
+   0.0003424819179423295
+  ],
+  "max": [
+   0.5000472664833068,
+   0.5999132871786768,
+   0.12054865158094416
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "box_cardboard_a01": {
+  "usd": "box_cardboard_a01/simready_usd/sm_box_cardboard_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.34971755743026733,
+   -0.260576993227005,
+   0.0
+  ],
+  "max": [
+   0.34971755743026733,
+   0.2605747878551483,
+   0.5099270939826965
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "box_cardboard_a02": {
+  "usd": "box_cardboard_a02/simready_usd/sm_box_cardboard_a02_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.34971755743026733,
+   -0.25496378540992737,
+   1.9483268332010084e-08
+  ],
+  "max": [
+   0.34971755743026733,
+   0.2549635171890259,
+   0.5211517214775085
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "box_cardboard_b01": {
+  "usd": "box_cardboard_b01/simready_usd/sm_box_cardboard_b01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.25514042377471924,
+   -0.2549726963043213,
+   0.0011916444632180977
+  ],
+  "max": [
+   0.25514042377471924,
+   0.2549722492694855,
+   0.5218576430338391
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "box_cardboard_c01": {
+  "usd": "box_cardboard_c01/simready_usd/sm_box_cardboard_c01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.25662168860435486,
+   -0.2552811801433563,
+   4.567050199171473e-05
+  ],
+  "max": [
+   0.25662168860435486,
+   0.25528109073638916,
+   0.25973510868787913
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "box_cardboard_d01": {
+  "usd": "box_cardboard_d01/simready_usd/sm_box_cardboard_d01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.17241989076137543,
+   -0.13219240307807922,
+   2.524431692764064e-05
+  ],
+  "max": [
+   0.17241990566253662,
+   0.13219228386878967,
+   0.1661373204315143
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "box_corrugated_brown_b04": {
+  "usd": "box_corrugated_brown_b04/simready_usd/sm_box_corrugated_brown_b04_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.09087560325860977,
+   -0.09097951650619507,
+   0.0
+  ],
+  "max": [
+   0.09096792340278625,
+   0.09104302525520325,
+   0.1806025207042694
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "box_corrugated_brown_b07": {
+  "usd": "box_corrugated_brown_b07/simready_usd/sm_box_corrugated_brown_b07_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.12552160024642944,
+   -0.12696793675422668,
+   0.0
+  ],
+  "max": [
+   0.12531697750091553,
+   0.1271791160106659,
+   0.25206342339515686
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "box_corrugated_white_a08": {
+  "usd": "box_corrugated_white_a08/simready_usd/sm_box_corrugated_white_a08_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.1481887847185135,
+   -0.15114855766296387,
+   0.0
+  ],
+  "max": [
+   0.1486259549856186,
+   0.15191344916820526,
+   0.3031863570213318
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "crate_blue_a01": {
+  "usd": "crate_blue_a01/simready_usd/sm_crate_blue_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.30256661772727966,
+   -0.20256663858890533,
+   8.220756426792245e-05
+  ],
+  "max": [
+   0.30256661772727966,
+   0.20256663858890533,
+   0.25330169324297797
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "crate_green_a01": {
+  "usd": "crate_green_a01/simready_usd/sm_crate_green_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.30256661772727966,
+   -0.20256663858890533,
+   0.0014893672891879224
+  ],
+  "max": [
+   0.30256661772727966,
+   0.20256663858890533,
+   0.25470885296789797
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "crate_yellow_a01": {
+  "usd": "crate_yellow_a01/simready_usd/sm_crate_yellow_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.30256661772727966,
+   -0.20256663858890533,
+   9.810135270922441e-06
+  ],
+  "max": [
+   0.30256661772727966,
+   0.20256663858890533,
+   0.25322929581398096
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "crate_red_a01": {
+  "usd": "crate_red_a01/simready_usd/sm_crate_red_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.30256661772727966,
+   -0.20256663858890533,
+   0.0011592648921879224
+  ],
+  "max": [
+   0.30256661772727966,
+   0.20256663858890533,
+   0.2543787505708979
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "warehouse_box_cube_a07": {
+  "usd": "warehouse_box_cube_a07/simready_usd/sm_warehouse_box_cube_a07_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.2571262149356386,
+   -0.2538494223293063,
+   0.0
+  ],
+  "max": [
+   0.2571737826514635,
+   0.2538506145073248,
+   0.5222999997734235
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "box_cube_a01": {
+  "usd": "box_cube_a01/simready_usd/sm_box_cube_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.05285755172371864,
+   -0.05259401351213455,
+   0.0
+  ],
+  "max": [
+   0.05285754054784775,
+   0.05259394645690918,
+   0.1052495464682579
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "vehicle_forklift_blue_a01": {
+  "usd": "vehicle_forklift_blue_a01/simready_usd/sm_vehicle_forklift_blue_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.41130218967554716,
+   -1.5341309309148317,
+   0.007644131780218812
+  ],
+  "max": [
+   0.411302219477866,
+   0.35115421560340043,
+   1.9651106446980344
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 15,
+  "colliders": 0,
+  "mass": 158.8184356689453
+ },
+ "vehicle_forklift_orange_a01": {
+  "usd": "vehicle_forklift_orange_a01/simready_usd/sm_vehicle_forklift_orange_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.41130218967554716,
+   -1.5341309309148317,
+   0.007644131780218812
+  ],
+  "max": [
+   0.411302219477866,
+   0.35115421560340043,
+   1.9651106446980344
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 15,
+  "colliders": 0,
+  "mass": 158.8184356689453
+ },
+ "vehicle_forklift_red_b01": {
+  "usd": "vehicle_forklift_red_b01/simready_usd/sm_vehicle_forklift_red_b01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.5646925801411271,
+   -2.1461485624365113,
+   9.399652649047519e-05
+  ],
+  "max": [
+   0.564691579900682,
+   0.8851617500185975,
+   2.9332689344561524
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 23,
+  "colliders": 0,
+  "mass": null
+ },
+ "palletJack_heavyDuty_a01": {
+  "usd": "palletJack_heavyDuty_a01/simready_usd/sm_palletJack_heavyDuty_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.34028786420822144,
+   -1.4648065567016602,
+   3.725043533353567e-08
+  ],
+  "max": [
+   0.34033331274986267,
+   0.13639003038406727,
+   1.2010423838895874
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 9,
+  "colliders": 0,
+  "mass": null
+ },
+ "handTruck_convertible_steel_orange_a01": {
+  "usd": "handTruck_convertible_steel_orange_a01/simready_usd/sm_handTruck_convertible_steel_orange_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.2504541687457531,
+   -0.3537101149559021,
+   2.533193046577731e-06
+  ],
+  "max": [
+   0.25048800184067577,
+   0.12687213714624784,
+   1.34814709427323
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 11,
+  "colliders": 0,
+  "mass": null
+ },
+ "equipment_robot_trolley_a01": {
+  "usd": "equipment_robot_trolley_a01/simready_usd/sm_equipment_robot_trolley_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.8409999608953552,
+   -0.7528039216995239,
+   0.0002551600097526613
+  ],
+  "max": [
+   0.8409999608953552,
+   0.7528039216995239,
+   2.3607653081028808
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 22,
+  "colliders": 0,
+  "mass": null
+ },
+ "equipment_robot_trolley_c01": {
+  "usd": "equipment_robot_trolley_c01/simready_usd/sm_equipment_robot_trolley_c01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.7528040409088135,
+   -0.7747375965561951,
+   8.983905255431635e-05
+  ],
+  "max": [
+   0.7528040409088135,
+   0.77473759654693,
+   1.8917364078806729
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 29,
+  "colliders": 0,
+  "mass": null
+ },
+ "tiltTruck_red_a04": {
+  "usd": "tiltTruck_red_a04/simready_usd/sm_tiltTruck_red_a04_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.4270556556876247,
+   -0.9283093214035034,
+   -3.95415644671715e-12
+  ],
+  "max": [
+   0.4263210904900486,
+   0.9305207118060241,
+   1.313381545998047
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 9,
+  "colliders": 0,
+  "mass": null
+ },
+ "warehouse_conveyorBelt_a01": {
+  "usd": "warehouse_conveyorBelt_a01/simready_usd/sm_warehouse_conveyorBelt_a01_01.usda",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.009925061134148556,
+   -1.5958786010652344,
+   3.13720160960429e-11
+  ],
+  "max": [
+   2.0704010132917174,
+   0.5048427581876953,
+   2.310952186615845
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Disabled"
+  },
+  "rigid": 29,
+  "colliders": 0,
+  "mass": null
+ },
+ "warehouse_conveyorBelt_a05": {
+  "usd": "warehouse_conveyorBelt_a05/simready_usd/sm_warehouse_conveyorBelt_a05_01.usda",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -8.325783710436915e-05,
+   -0.5754915465076932,
+   1.5505319264316232e-16
+  ],
+  "max": [
+   2.000000524523785,
+   0.5754606138507358,
+   1.1663306856155489
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Disabled"
+  },
+  "rigid": 30,
+  "colliders": 0,
+  "mass": null
+ },
+ "conveyor_belt_a02": {
+  "usd": "conveyor_belt_a02/simready_usd/sm_conveyor_belt_a02_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.003189086533019969,
+   -8.61884057006268e-05,
+   0.00010961291921385286
+  ],
+  "max": [
+   2.0975401405330203,
+   2.071335196405701,
+   1.166440427280786
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 29,
+  "colliders": 0,
+  "mass": 121.47793579101562
+ },
+ "warehouse_packingTable_heavyDuty_c02": {
+  "usd": "warehouse_packingTable_heavyDuty_c02/simready_usd/sm_warehouse_packingTable_heavyDuty_c02_01.usda",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -1.2368232011795044,
+   -0.38099998235702515,
+   0.0006552193663083017
+  ],
+  "max": [
+   1.2368232011795044,
+   0.38099998235702515,
+   0.9947065711021423
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Disabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "workstation_factory_a01": {
+  "usd": "workstation_factory_a01/simready_usd/sm_workstation_factory_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.771780252456665,
+   -1.549252986907959,
+   0.00022614747777527366
+  ],
+  "max": [
+   1.399820208468811,
+   1.549252986907959,
+   3.265817642623047
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 45,
+  "colliders": 0,
+  "mass": 40.0
+ },
+ "tape_safety_yellow_black_12m15cm_f06": {
+  "usd": "tape_safety_yellow_black_12m15cm_f06/simready_usd/sm_tape_safety_yellow_black_12m15cm_f06_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   3.24482968272477e-10,
+   -0.1500028669834137,
+   0.0
+  ],
+  "max": [
+   12.0,
+   -1.220703097715159e-06,
+   0.0010009765392169356
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "tape_safety_yellow_10m10cm_b05": {
+  "usd": "tape_safety_yellow_10m10cm_b05/simready_usd/sm_tape_safety_yellow_10m10cm_b05_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   0.0,
+   -0.10000193119049072,
+   0.0
+  ],
+  "max": [
+   10.0,
+   6.103515488575795e-07,
+   0.001000213553197682
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": 4.606097221374512
+ },
+ "barrier_fence_metal_a02": {
+  "usd": "barrier_fence_metal_a02/simready_usd/sm_barrier_fence_metal_a02_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.11493629217147827,
+   -0.11499999463558197,
+   6.763361384288369e-05
+  ],
+  "max": [
+   1.1148637533187866,
+   0.11499999463558197,
+   1.0718521656162932
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "sign_floor_movable_a01": {
+  "usd": "sign_floor_movable_a01/simready_usd/sm_sign_floor_movable_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.19247138500213623,
+   -0.21847442908825188,
+   0.000225752588845142
+  ],
+  "max": [
+   0.19247138500213623,
+   0.19247138500213623,
+   1.2968565225601196
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 11,
+  "colliders": 0,
+  "mass": null
+ },
+ "sign_warning_a04": {
+  "usd": "sign_warning_a04/simready_usd/sm_sign_warning_a04_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.13999994099140167,
+   -0.20140624045942382,
+   -1.3366530104974572e-12
+  ],
+  "max": [
+   0.13999997079372406,
+   0.20140624046708985,
+   0.9598361253725036
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 1,
+  "colliders": 0,
+  "mass": null
+ },
+ "fireProtection_extinguisher_portable_a01": {
+  "usd": "fireProtection_extinguisher_portable_a01/simready_usd/sm_fireProtection_extinguisher_portable_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -3.5762786865234375e-06,
+   -0.09402044862508774,
+   9.796721860766411e-05
+  ],
+  "max": [
+   0.1086844652891159,
+   0.09000615775585175,
+   0.4173942804336548
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 2,
+  "colliders": 0,
+  "mass": null
+ },
+ "warehouse_barrel_plastic_a01": {
+  "usd": "warehouse_barrel_plastic_a01/simready_usd/sm_warehouse_barrel_plastic_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.25,
+   -0.2499999850988388,
+   0.0002523064617987042
+  ],
+  "max": [
+   0.25,
+   0.2612435817718506,
+   0.9621282517914649
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 3,
+  "colliders": 0,
+  "mass": null
+ },
+ "drum_steel_a01": {
+  "usd": "drum_steel_a01/simready_usd/sm_drum_steel_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.320921391248703,
+   -0.33614628016960063,
+   -1.4754477639655761e-08
+  ],
+  "max": [
+   0.3209248185157776,
+   0.32092228531837463,
+   0.8682770132584534
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 2,
+  "colliders": 0,
+  "mass": null
+ },
+ "wasteManagement_trashBin_wheeled_a01": {
+  "usd": "wasteManagement_trashBin_wheeled_a01/simready_usd/sm_wasteManagement_trashBin_wheeled_a01_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.3318519592285156,
+   -0.4114865362793091,
+   0.00011167675133345878
+  ],
+  "max": [
+   0.3318553864955902,
+   0.3481578957140562,
+   1.2076761087489833
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 3,
+  "colliders": 0,
+  "mass": 2.9685511589050293
+ },
+ "ladder_rolling_yellow_a02": {
+  "usd": "ladder_rolling_yellow_a02/simready_usd/sm_ladder_rolling_yellow_a02_01.usd",
+  "prim": "/RootNode",
+  "up": "Z",
+  "mpu": 1.0,
+  "min": [
+   -0.3485961854457855,
+   -0.3898029327392578,
+   1.045404679e-05
+  ],
+  "max": [
+   0.3485960364341736,
+   0.3898029327392578,
+   1.5371870630860967
+  ],
+  "variants": {
+   "MuJoCo": [
+    "Disabled",
+    "Enabled"
+   ],
+   "Newton": [
+    "Disabled",
+    "Enabled"
+   ],
+   "PhysX": [
+    "Disabled",
+    "Enabled"
+   ]
+  },
+  "selected": {
+   "MuJoCo": "Disabled",
+   "Newton": "Disabled",
+   "PhysX": "Enabled"
+  },
+  "rigid": 3,
+  "colliders": 0,
+  "mass": null
+ }
+}
