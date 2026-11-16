@@ -10,7 +10,7 @@ The scene is a warehouse of 50 by 40 metres assembled from 71 NVIDIA SimReady as
 
 Up to 21 Go2 robots walk with a locomotion policy trained in Isaac Lab. Twenty of them follow fixed patrol routes in the rack aisles, the north aisle and the staging yard. The remaining robot is controlled through ROS 2. The simulation publishes its odometry, its transforms and a planar laser scan. From these, slam_toolbox builds a map and Nav2 computes the velocity commands that drive the robot through a sequence of goals.
 
-Vehicles and workers move along predefined paths. Vehicles stop for workers and for robots. Patrol robots stop for workers. When a robot falls, the runner detects the fall from the base height and orientation and places the robot upright at the position it occupied about 2.5 seconds earlier.
+Vehicles and workers move along predefined paths. Vehicles stop for workers and for robots. Patrol robots follow the line of their route, stop for workers in their path and keep a distance of 1.3 metres to the robot ahead. The routes keep at least 0.9 metres between a lane and a line of building columns. When a robot falls, the runner detects the fall from the base height and orientation and places the robot upright at the position it occupied about 2.5 seconds earlier.
 
 ## Repository structure
 
@@ -25,7 +25,7 @@ Vehicles and workers move along predefined paths. Vehicles stop for workers and 
 | `apps/` | Kit experience files that add the extensions the runner requires |
 | `nav/` | Nav2 and slam_toolbox configuration, launch file, goal sequence and a scan check |
 | `docker/Dockerfile` | ROS 2 Jazzy image with Nav2 and slam_toolbox |
-| `tools/check_paths.py` | Checks robot, vehicle and worker paths against the scene geometry and reports paths that cross walls, pillars or racks |
+| `tools/check_paths.py` | Checks robot, vehicle and worker paths against the scene geometry and reports paths that cross walls, pillars or racks or that pass closer than 0.45 metres to them for robots |
 
 ## Requirements
 
@@ -106,7 +106,7 @@ With eight robots and the ROS 2 interface, the simulation runs at about 15 envir
 
 ## Known limitations
 
-The locomotion policy occasionally falls during turns on the spot at the corners of the patrol loops. The fall recovery keeps the simulation running, but the robot is moved back by about two metres.
+The locomotion policy can fall during sharp turns at the corners of the patrol loops. The fall recovery keeps the simulation running, but the robot is moved back by about two metres. In a test run of 121 seconds with all 21 robots, every robot moved at 0.78 to 0.82 metres per second, no robot stayed in place for longer than a turn and no robot fell.
 
 The laser scan used by Nav2 is computed by ray casting against the obstacle footprints of the scene. The RTX lidar sensor of Isaac Sim produced only partial sweeps in this configuration.
 

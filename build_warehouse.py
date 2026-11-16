@@ -343,24 +343,36 @@ print("removed rigid bodies", kin, "joints", joints, "physics scenes", scenes)
 stage.GetRootLayer().Save()
 
 robots = [{"start": [31.4, 2.6, 90.0], "route": [[31.4, 36.0], [31.4, 3.0]], "role": "hero"}]
+COLUMN_LINES = (10.0, 20.0, 30.0)
+
+
+def lane(y):
+    for yc in COLUMN_LINES:
+        if abs(y - yc) < 0.9:
+            return yc + math.copysign(0.9, y - yc)
+    return y
+
+
 for a in aisles:
-    loop = [[4.6, a - 0.8], [28.4, a - 0.8], [28.4, a + 0.8], [4.6, a + 0.8]]
-    L = 2 * (28.4 - 4.6) + 2 * 1.6
+    lo, hi = lane(a - 0.8), lane(a + 0.8)
+    dh = hi - lo
+    loop = [[4.6, lo], [28.4, lo], [28.4, hi], [4.6, hi]]
+    L = 2 * (28.4 - 4.6) + 2 * dh
     for k in range(3):
         s = k * L / 3
         if s < 23.8:
-            st, w = [4.6 + s, a - 0.8, 0.0], 1
-        elif s < 25.4:
-            st, w = [28.4, a - 0.8 + (s - 23.8), 90.0], 2
+            st, w = [4.6 + s, lo, 0.0], 1
+        elif s < 23.8 + dh:
+            st, w = [28.4, lo + (s - 23.8), 90.0], 2
         else:
-            st, w = [28.4 - (s - 25.4), a + 0.8, 180.0], 3
+            st, w = [28.4 - (s - 23.8 - dh), hi, 180.0], 3
         robots.append({"start": st, "route": loop[w:] + loop[:w], "role": "aisle"})
-yard = [[35.8, 5.3], [45.6, 5.3], [45.6, 11.7], [35.8, 11.7]]
-for k, st in enumerate(([36.5, 5.3, 0.0], [45.6, 8.0, 90.0], [42.0, 11.7, 180.0])):
+yard = [[35.8, 5.3], [46.1, 5.3], [46.1, 11.7], [35.8, 11.7]]
+for k, st in enumerate(([36.5, 5.3, 0.0], [46.1, 8.0, 90.0], [42.0, 11.7, 180.0])):
     robots.append({"start": st, "route": yard[k + 1:] + yard[:k + 1], "role": "yard"})
-nl = [[4.6, north_aisle - 0.5], [28.4, north_aisle - 0.5]]
-robots.append({"start": [8.0, north_aisle - 0.5, 0.0], "route": [nl[1], nl[0]], "role": "north"})
-robots.append({"start": [24.0, north_aisle - 0.5, 180.0], "route": [nl[0], nl[1]], "role": "north"})
+nl = [[4.6, north_aisle - 0.7], [28.4, north_aisle - 0.7], [28.4, north_aisle + 0.3], [4.6, north_aisle + 0.3]]
+robots.append({"start": [8.0, north_aisle - 0.7, 0.0], "route": nl[1:] + nl[:1], "role": "north"})
+robots.append({"start": [24.0, north_aisle + 0.3, 180.0], "route": nl[3:] + nl[:3], "role": "north"})
 
 hero = robots[0]["start"]
 yaw0 = math.radians(hero[2])

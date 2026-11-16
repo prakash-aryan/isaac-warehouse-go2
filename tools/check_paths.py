@@ -100,7 +100,7 @@ print("meshes rasterised", meshes, "occupied cells", int(occ.sum()))
 for m in lay["people"]:
     check("person " + m["prim"].split("/")[-1], m["path"], 0.3)
 for i, r in enumerate(lay["robots"]):
-    check(f"robot {i}", r["route"], 0.3, loop=True)
+    check(f"robot {i}", r["route"], 0.45, loop=True)
 for m in lay["movers"]:
     if m.get("mode") != "spin":
         check("mover " + m["prim"].split("/")[-1], m["path"], max(m.get("half", [0.5, 0.5])))

@@ -88,6 +88,16 @@ def blocked(pos, heading, others, dist, cone=40.0):
     return False
 
 
+def ahead(pos, heading, others, dist, half):
+    c, s = math.cos(heading), math.sin(heading)
+    for o in others:
+        dx, dy = o[0] - pos[0], o[1] - pos[1]
+        f = dx * c + dy * s
+        if 0.05 < f < dist and abs(dy * c - dx * s) < half:
+            return True
+    return False
+
+
 class Movers:
     def __init__(self, stage):
         from pxr import UsdGeom
@@ -518,14 +528,29 @@ def attach_scan_writer(lidar, sensor):
                          rotationRate=rate, azimuthRange=[-180.0, 180.0])
 
 
-def controller(pos, yaw, wps, k):
+TURN = {}
+
+
+def controller(pos, yaw, wps, k, i=0, look=0.8):
     if math.dist(pos, wps[k]) < 0.8:
         k = (k + 1) % len(wps)
-    tx, ty = wps[k]
+    (ax, ay), (bx, by) = wps[k - 1], wps[k]
+    dx, dy = bx - ax, by - ay
+    seg = math.hypot(dx, dy)
+    if seg > 1e-6:
+        t = ((pos[0] - ax) * dx + (pos[1] - ay) * dy) / (seg * seg)
+        t = min(1.0, max(0.0, t) + look / seg)
+    else:
+        t = 1.0
+    tx, ty = ax + t * dx, ay + t * dy
     err = math.atan2(ty - pos[1], tx - pos[0]) - yaw
     err = math.atan2(math.sin(err), math.cos(err))
+    if abs(err) > 2.4:
+        err = math.copysign(abs(err), TURN.get(i, 1.0))
+    else:
+        TURN[i] = 1.0 if err >= 0 else -1.0
     vx = own.speed * max(0.0, math.cos(err)) ** 2
-    wz = max(-1.0, min(1.0, 1.8 * err))
+    wz = max(-0.8, min(0.8, 1.8 * err))
     return [vx, 0.0, wz], k
 
 
@@ -649,6 +674,7 @@ def main():
         term = u.command_manager.get_term("base_velocity")
         wps = [[tuple(w) for w in r["route"]] for r in robots]
         ks = [0] * N
+        rwait = [0] * N
         hero_cmd = [0.0, 0.0, 0.0]
         lf, lz = LAYOUT["lidar_forward"], LAYOUT["lidar_height"]
         stats, t_wall0, last_t, last_wall = [], time.monotonic(), 0, time.monotonic()
@@ -673,6 +699,8 @@ def main():
                         hero_cmd = [0.0, 0.0, 0.0]
                     obs = env.get_observations()
                 cmds = []
+                xy = [tuple(p[:2]) for p in pos]
+                follow = [[j for j in range(N) if j != i and ahead(xy[i], yaws[i], [xy[j]], 1.3, 0.55)] for i in range(N)]
                 for i in range(N):
                     if i == 0 and ros is not None:
                         vx, vy, wz = ros.command()
@@ -681,8 +709,12 @@ def main():
                             hero_cmd[j] += 0.08 * (tgt[j] - hero_cmd[j])
                         cmds.append(list(hero_cmd))
                     else:
-                        cmd, ks[i] = controller(pos[i][:2], yaws[i], wps[i], ks[i])
-                        if blocked(pos[i][:2], yaws[i], people.where, 1.7, 35.0):
+                        cmd, ks[i] = controller(pos[i][:2], yaws[i], wps[i], ks[i], i)
+                        rb = [j for j in follow[i] if not (i in follow[j] and i < j)]
+                        rwait[i] = rwait[i] + 1 if rb else 0
+                        if rwait[i] > 300:
+                            rwait[i] = 0
+                        if ahead(xy[i], yaws[i], people.where, 1.7, 0.6) or (rb and rwait[i] < 200):
                             cmd = [0.0, 0.0, 0.0]
                         cmds.append(cmd)
                 term.vel_command_b[:] = torch.tensor(cmds, device=dev)
