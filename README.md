@@ -2,7 +2,7 @@
 
 Simulation of a warehouse with Unitree Go2 quadruped robots in Isaac Lab 3.0 and Isaac Sim 6.2, with navigation through ROS 2 Jazzy.
 
-![Warehouse simulation with Go2 robots, a forklift and workers](docs/warehouse.gif)
+![Go2 robots under Nav2 in a rack aisle of the warehouse, one lane per direction](docs/warehouse.gif)
 
 ## Description
 
