@@ -23,6 +23,4 @@ def generate_launch_description():
     actions.append(Node(package="nav2_lifecycle_manager", executable="lifecycle_manager", name=MANAGER, output="screen",
                         parameters=[{"use_sim_time": False, "autostart": False, "bond_timeout": 0.0,
                                      "node_names": [exe for _, exe in NAV2]}]))
-    actions.append(Node(package="foxglove_bridge", executable="foxglove_bridge", name="foxglove_bridge",
-                        parameters=[sim_time, {"port": 8765, "address": "0.0.0.0"}]))
     return LaunchDescription(actions)

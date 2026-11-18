@@ -8,7 +8,7 @@ Simulation of a warehouse with Unitree Go2 quadruped robots in Isaac Lab 3.0 and
 
 The scene is a warehouse of 50 by 40 metres assembled from 71 NVIDIA SimReady asset packages. It contains eleven rows of storage racks, a pallet staging area, a packing line with a conveyor, two forklifts, a pallet jack, a pallet stacker and ten walking workers.
 
-Up to 21 Go2 robots walk with a locomotion policy trained in Isaac Lab. Twenty of them follow fixed patrol routes in the rack aisles, the north aisle and the staging yard. The remaining robot is controlled through ROS 2. The simulation publishes its odometry, its transforms and a planar laser scan. From these, slam_toolbox builds a map and Nav2 computes the velocity commands that drive the robot through a sequence of goals.
+Up to 21 Go2 robots walk with a locomotion policy trained in Isaac Lab. They follow patrol routes in the rack aisles, the north aisle and the staging yard. Two navigation modes are available. In the single-robot mode, one robot is controlled through ROS 2: slam_toolbox builds a map from its laser scan and Nav2 drives it through a sequence of goals, while the other robots follow their routes with a scripted controller. In the fleet mode, the first N robots each run their own Nav2 stack on a prebuilt map and drive their patrol routes through Nav2. The remaining robots keep the scripted controller.
 
 Vehicles and workers move along predefined paths. Vehicles stop for workers and for robots. Patrol robots follow the line of their route, stop for workers in their path and keep a distance of 1.3 metres to the robot ahead. The routes keep at least 0.9 metres between a lane and a line of building columns. When a robot falls, the runner detects the fall from the base height and orientation and places the robot upright at the position it occupied about 2.5 seconds earlier.
 
@@ -20,10 +20,16 @@ Vehicles and workers move along predefined paths. Vehicles stop for workers and 
 | `probe_assets.py` | Reads the downloaded packages and writes `assets.json` with their bounds, variants and collider counts |
 | `build_warehouse.py` | Writes the scene file and a layout file with robot routes, vehicle and worker paths, obstacle footprints and navigation goals |
 | `run_warehouse.py` | Runs the simulation in Isaac Lab: robots with the locomotion policy, vehicles, workers, the ROS 2 interface and fall recovery |
-| `run.sh` | Starts the runner with the ROS 2 environment and the selected GPU |
+| `run.sh` | Starts the runner with the ROS 2 environment and the selected GPU (single-robot mode) |
+| `run_sim.sh`, `run_sensors.sh`, `common.sh` | Start the runner and the lidar process for the fleet mode |
+| `sensors.py`, `stream.py`, `mirror.py` | Second Isaac Sim process that receives the robot, worker and vehicle poses from the runner and publishes one RTX lidar scan per Nav2 robot |
 | `ros_env.sh` | Environment variables for the ROS 2 bridge included in Isaac Sim |
 | `apps/` | Kit experience files that add the extensions the runner requires |
-| `nav/` | Nav2 and slam_toolbox configuration, launch file, goal sequence and a scan check |
+| `nav/` | Single-robot mode: Nav2 and slam_toolbox configuration, launch file, goal sequence and a scan check |
+| `nav/make_map.py` | Writes the Nav2 map (PGM and YAML) from the obstacle footprints in the layout file |
+| `nav/fleet.sh`, `nav/fleet_nav2.launch.py`, `nav/make_fleet_params.py`, `nav/bt_wait.xml` | Fleet mode: one Nav2 stack per robot (NavFn planner, Regulated Pure Pursuit, Collision Monitor) |
+| `nav/turn_arc.py` | Replaces turns in place, which the locomotion policy performs poorly, with short arcs between the Nav2 controller and the Collision Monitor |
+| `nav/fleet_patrol.py` | Sends each robot its patrol goals through Nav2 and holds a goal back while another robot turns around or passes a narrow section |
 | `docker/Dockerfile` | ROS 2 Jazzy image with Nav2 and slam_toolbox |
 | `tools/check_paths.py` | Checks robot, vehicle and worker paths against the scene geometry and reports paths that cross walls, pillars or racks or that pass closer than 0.45 metres to them for robots |
 
@@ -104,11 +110,48 @@ The option `--robots` sets the number of robots (at most 21), `--steps` limits t
 
 With eight robots and the ROS 2 interface, the simulation runs at about 15 environment steps per second on one L40S, which corresponds to 0.31 of real time. In repeated runs the navigating robot reached all seven goals of the sequence.
 
+## Running several robots with Nav2
+
+The fleet mode needs a map. Write it from the layout file that `build_warehouse.py` produced:
+
+```bash
+~/IsaacLab/.venv/bin/python nav/make_map.py warehouse_layout.json maps/warehouse
+```
+
+Start the runner with the first four robots under Nav2, then the lidar process, then Nav2 and the patrol (each command in its own terminal, in this order):
+
+```bash
+SIM_GPU=0 ROBOTS=21 ./run_sim.sh --nav 4 --collide_robots 1 --falls logs/falls.json --contacts logs/contacts.json
+SENSOR_GPU=0 ROBOTS=21 ./run_sensors.sh --num_lidars 4 --fire_hz 7200
+bash nav/fleet.sh 4 warehouse_layout.json maps/warehouse.yaml
+```
+
+`--nav` sets how many robots, counted from the first robot of the layout, run under Nav2. Each of them gets its own namespace (`/go2_0`, `/go2_1`, ...) with odometry, transforms, a lidar scan and a `navigate_to_pose` action. The runner also publishes, for every Nav2 robot, the outlines of the other robots as a point cloud for the Collision Monitor and as an occupancy grid for the costmaps. `nav/fleet.sh` restarts the Nav2 container when not every stack comes up, which happens on a heavily loaded machine. A fourth argument limits the patrol to that many seconds of simulated time.
+
+The patrol script reads the map and adjusts the routes to the walking policy, which needs about one metre of width to turn around. A route end without that room is moved back along the route. A robot heading towards another robot that is turning around stops about 2.5 metres away until the turn is finished. A robot also waits before a section narrower than 2.4 metres while another robot comes through it.
+
+### Results
+
+The tests below used two Nav2 robots, four minutes of simulated time per run and the contact sensors of the robots. A contact counts as a collision when it does not belong to a fall.
+
+| Test | Runs | Goals reached per run | Failed goals per run | Collisions between robots | Contacts with racks or columns | Falls |
+|---|---|---|---|---|---|---|
+| Head-on in one lane of the 3.6 m aisle at y = 2.85 | 9 | 18 to 19 | 0 | 0 | 0 | 1 |
+| One lane per direction, aisle at y = 2.85 | 3 | 28 | 0 | 0 | 0 | 0 |
+| One lane per direction, aisle at y = 9 with building columns | 2 | 24 | 0 | 0 | 0 | 0 |
+| One lane per direction, open area at x = 32 to 33.6 | 4 | 18 to 30 | 2 to 3 | 0 | 0 | 0 |
+
+The fall in the head-on test happened while the robot stood still after a stop, about 1.3 metres from the other robot, which it did not touch. In a run of the commands above with four Nav2 robots and 17 scripted robots, the Nav2 robots reached 42 of 43 goals (the failed goal succeeded on the next attempt) and made no contact with anything.
+
 ## Known limitations
 
 The locomotion policy can fall during sharp turns at the corners of the patrol loops. The fall recovery keeps the simulation running, but the robot is moved back by about two metres. In a test run of 121 seconds with all 21 robots, every robot moved at 0.78 to 0.82 metres per second, no robot stayed in place for longer than a turn and no robot fell.
 
-The laser scan used by Nav2 is computed by ray casting against the obstacle footprints of the scene. The RTX lidar sensor of Isaac Sim produced only partial sweeps in this configuration.
+In the single-robot mode, the laser scan used by Nav2 is computed by ray casting against the obstacle footprints of the scene, because the RTX lidar sensor produced only partial sweeps inside the runner. The fleet mode renders the RTX lidars in the separate process `sensors.py`, which receives the poses from the runner.
+
+Two Nav2 robots that meet head-on in a single lane pass each other in the 3.6 metre aisle, but they can stop each other for minutes in narrower places, because the policy cannot turn in place and neither robot backs up. One lane per direction avoids this in the rack aisles. At the ends of the north-south lanes in the open area, two to three goals per run still fail while both robots wait for each other at the turnaround.
+
+The Nav2 map comes from the obstacle footprints only. Pallets, boxes and other objects without a footprint appear to Nav2 only through the lidar scan.
 
 ## Links
 

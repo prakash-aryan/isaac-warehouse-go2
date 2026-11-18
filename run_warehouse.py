@@ -11,6 +11,7 @@ import random
 import sys
 import time
 
+import numpy as np
 import torch
 
 from isaaclab_rl.entrypoints.backends import play_rsl_rl as P
@@ -28,6 +29,18 @@ ap.add_argument("--pace", action="store_true")
 ap.add_argument("--falls", default="")
 ap.add_argument("--floor_drop", type=float, default=0.0)
 ap.add_argument("--render_every", type=int, default=1)
+ap.add_argument("--stream", default="")
+ap.add_argument("--nav", type=int, default=0)
+ap.add_argument("--map_odom", type=int, default=1)
+ap.add_argument("--mount_x", type=float, default=0.38)
+ap.add_argument("--mount_z", type=float, default=0.0)
+ap.add_argument("--ros_every", type=int, default=2)
+ap.add_argument("--contacts", default="")
+ap.add_argument("--contact_n", type=float, default=1.0)
+ap.add_argument("--navlog", default="")
+ap.add_argument("--monitor_static", type=int, default=0)
+ap.add_argument("--fleet_map", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "maps", "warehouse.yaml"))
+ap.add_argument("--collide_robots", type=int, default=0)
 own, rest = ap.parse_known_args(sys.argv[1:])
 LAYOUT = json.load(open(own.scene.replace(".usda", "_layout.json")))
 N = own.robots
@@ -43,6 +56,8 @@ def configure(env_cfg):
     from isaaclab.assets import AssetBaseCfg, RigidObjectCfg
 
     env_cfg.scene.num_envs = N
+    if own.collide_robots:
+        env_cfg.scene.filter_collisions = False
     env_cfg.scene.env_spacing = 2.0
     env_cfg.episode_length_s = 1.0e6
     env_cfg.sim.render_interval = env_cfg.decimation * own.render_every
@@ -498,6 +513,220 @@ class Ros:
         self.tf.publish(self.TFMessage(transforms=[self._tf("odom", "base_link", ox, oy, 0.0, oyaw, t)]))
 
 
+class FleetRos:
+    def __init__(self, starts, mount):
+        import threading
+
+        import rclpy
+        from geometry_msgs.msg import TransformStamped, Twist
+        from nav_msgs.msg import Odometry
+        from rclpy.executors import SingleThreadedExecutor
+        from rclpy.qos import DurabilityPolicy, QoSProfile
+        from rosgraph_msgs.msg import Clock
+        from tf2_msgs.msg import TFMessage
+
+        rclpy.init()
+        self.node = rclpy.create_node("warehouse_fleet")
+        self.Odometry, self.TransformStamped, self.TFMessage, self.Clock = Odometry, TransformStamped, TFMessage, Clock
+        self.starts = starts
+        self.tsim = 0.0
+        self.cmd = [((0.0, 0.0, 0.0), -1.0e9) for _ in starts]
+        self.clock = self.node.create_publisher(Clock, "/clock", 10)
+        static_qos = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL)
+        self.odom, self.tf, self.tf_static = [], [], []
+        for i, (x0, y0, yaw0) in enumerate(starts):
+            ns = f"/go2_{i}"
+            self.odom.append(self.node.create_publisher(Odometry, f"{ns}/odom", 10))
+            self.tf.append(self.node.create_publisher(TFMessage, f"{ns}/tf", 50))
+            st = self.node.create_publisher(TFMessage, f"{ns}/tf_static", static_qos)
+            tfs = [self._tf("base_link", "laser", mount[0], 0.0, mount[1], 0.0, None)]
+            if own.map_odom:
+                tfs.append(self._tf("map", "odom", x0, y0, 0.0, yaw0, None))
+            st.publish(TFMessage(transforms=tfs))
+            self.tf_static.append(st)
+            self.node.create_subscription(Twist, f"{ns}/cmd_vel", lambda m, i=i: self._on_cmd(i, m), 10)
+        from sensor_msgs.msg import LaserScan, PointCloud2, PointField
+
+        self.PointCloud2, self.PointField = PointCloud2, PointField
+        self.fleet = [self.node.create_publisher(PointCloud2, f"/go2_{i}/fleet_points", 5) for i in range(len(starts))]
+        from nav_msgs.msg import OccupancyGrid
+
+        self.OccupancyGrid = OccupancyGrid
+        self.fleet_map = [[self.node.create_publisher(OccupancyGrid, f"/go2_{i}/{c}/fleet_map", static_qos)
+                           for c in ("global_costmap", "local_costmap")] for i in range(len(starts))]
+        self.grid = self._map_geometry(own.fleet_map)
+        self.static_xy = self._map_obstacles(own.fleet_map, self.grid)
+        bx, by = np.meshgrid(np.arange(-0.8, 0.83, 0.04), np.arange(-0.6, 0.63, 0.04))
+        self.body = np.stack([bx.ravel(), by.ravel()], 1)
+        sx, sy = np.meshgrid(np.arange(-0.42, 0.43, 0.04), np.arange(-0.2, 0.21, 0.04))
+        self.body_true = np.stack([sx.ravel(), sy.ravel()], 1)
+        lx, ly = np.meshgrid(np.arange(0.55, 4.05, 0.04), np.arange(-0.45, 0.46, 0.04))
+        self.lane = np.stack([lx.ravel(), ly.ravel()], 1)
+        gx, gy = np.meshgrid(np.arange(-0.47, 0.50, 0.06), np.arange(-0.25, 0.26, 0.06))
+        self.shape = np.stack([gx.ravel(), gy.ravel()], 1)
+        ex = SingleThreadedExecutor()
+        ex.add_node(self.node)
+        threading.Thread(target=ex.spin, daemon=True).start()
+        print("[wh] fleet ros up:", len(starts), "robots, map->odom", "ground truth" if own.map_odom else "external", flush=True)
+
+    def _on_cmd(self, i, m):
+        self.cmd[i] = ((m.linear.x, m.linear.y, m.angular.z), self.tsim)
+
+    def command(self, i):
+        c, t = self.cmd[i]
+        return c if self.tsim - t <= 0.5 else (0.0, 0.0, 0.0)
+
+    def _stamp(self, t):
+        from builtin_interfaces.msg import Time
+
+        sec = int(t)
+        return Time(sec=sec, nanosec=int((t - sec) * 1e9))
+
+    def _tf(self, parent, child, x, y, z, yaw, t):
+        m = self.TransformStamped()
+        if t is not None:
+            m.header.stamp = self._stamp(t)
+        m.header.frame_id, m.child_frame_id = parent, child
+        m.transform.translation.x, m.transform.translation.y, m.transform.translation.z = x, y, z
+        m.transform.rotation.z, m.transform.rotation.w = math.sin(yaw / 2), math.cos(yaw / 2)
+        return m
+
+    def publish_fleet(self, t, allpos, allyaw, reach=10.0, with_map=True):
+        stamp = self._stamp(t)
+        P = np.asarray(allpos, dtype=np.float64)[:, :2]
+        for i in range(len(self.starts)):
+            pts = []
+            for j in range(len(P)):
+                if j == i or np.hypot(*(P[j] - P[i])) > reach:
+                    continue
+                c, s = math.cos(allyaw[j]), math.sin(allyaw[j])
+                R = np.array([[c, -s], [s, c]])
+                pts.append(self.shape @ R.T + P[j])
+            if own.monitor_static and len(self.static_xy):
+                near = self.static_xy[np.abs(self.static_xy - P[i]).max(axis=1) < 2.0]
+                if len(near):
+                    pts.append(near)
+            xyz = np.zeros((0, 3), dtype=np.float32)
+            if pts:
+                xy = np.concatenate(pts)
+                xyz = np.concatenate([xy, np.full((len(xy), 1), 0.3)], 1).astype(np.float32)
+            m = self.PointCloud2()
+            m.header.stamp = stamp
+            m.header.frame_id = "map"
+            m.height, m.width = 1, len(xyz)
+            m.fields = [self.PointField(name=n, offset=4 * k, datatype=self.PointField.FLOAT32, count=1) for k, n in enumerate("xyz")]
+            m.is_bigendian, m.point_step, m.row_step, m.is_dense = False, 12, 12 * len(xyz), True
+            m.data = xyz.tobytes()
+            self.fleet[i].publish(m)
+            if with_map and self.grid is not None:
+                self._publish_fleet_map(i, stamp, P, allyaw, reach)
+
+    @staticmethod
+    def _map_obstacles(path, g):
+        if g is None:
+            return np.zeros((0, 2))
+        try:
+            meta = dict(line.split(":", 1) for line in open(path) if ":" in line)
+            img = os.path.join(os.path.dirname(path), meta["image"].strip())
+            raw = open(img, "rb").read()
+            head, k = [], 0
+            while len(head) < 4:
+                while raw[k:k + 1].isspace():
+                    k += 1
+                j = k
+                while not raw[j:j + 1].isspace():
+                    j += 1
+                head.append(raw[k:j])
+                k = j
+            pix = np.frombuffer(raw[k + 1:k + 1 + g["w"] * g["h"]], dtype=np.uint8).reshape(g["h"], g["w"])
+            rows, cols = np.nonzero(pix < 100)
+            xy = np.stack([g["ox"] + (cols + 0.5) * g["res"], g["oy"] + (g["h"] - 1 - rows + 0.5) * g["res"]], 1)
+            print("[wh] static obstacle points for the monitor:", len(xy), flush=True)
+            return xy
+        except Exception as e:
+            print("[wh] static obstacles disabled:", e, flush=True)
+            return np.zeros((0, 2))
+
+    @staticmethod
+    def _map_geometry(path):
+        try:
+            meta = {}
+            for line in open(path):
+                if ":" in line:
+                    k, v = line.split(":", 1)
+                    meta[k.strip()] = v.strip()
+            img = os.path.join(os.path.dirname(path), meta["image"])
+            with open(img, "rb") as f:
+                head = f.read(64).split()
+            w, h = int(head[1]), int(head[2])
+            ox, oy = [float(v) for v in meta["origin"].strip("[]").split(",")[:2]]
+            return {"w": w, "h": h, "res": float(meta["resolution"]), "ox": ox, "oy": oy}
+        except Exception as e:
+            print("[wh] fleet map disabled:", e, flush=True)
+            return None
+
+    def _publish_fleet_map(self, i, stamp, P, allyaw, reach):
+        g = self.grid
+        lanes = np.zeros((g["h"], g["w"]), dtype=np.int8)
+        bodies = np.zeros((g["h"], g["w"]), dtype=np.int8)
+
+        def mark(grid, w):
+            cx = ((w[:, 0] - g["ox"]) / g["res"]).astype(int)
+            cy = ((w[:, 1] - g["oy"]) / g["res"]).astype(int)
+            ok = (cx >= 0) & (cx < g["w"]) & (cy >= 0) & (cy < g["h"])
+            grid[cy[ok], cx[ok]] = 100
+
+        for j in range(len(P)):
+            if j == i or np.hypot(*(P[j] - P[i])) > reach + 4.0:
+                continue
+            c, s = math.cos(allyaw[j]), math.sin(allyaw[j])
+            R = np.array([[c, -s], [s, c]]).T
+            mark(bodies, self.body_true @ R + P[j])
+            rel = P[i] - P[j]
+            ahead = c * rel[0] + s * rel[1]
+            facing = math.cos(allyaw[i] - allyaw[j]) < -0.3
+            if j < i and ahead > 0.0 and facing:
+                lw = self.lane @ R + P[j]
+                lw = lw[np.hypot(lw[:, 0] - P[i][0], lw[:, 1] - P[i][1]) > 1.2]
+                mark(lanes, lw)
+        for k, grid in enumerate((lanes, np.maximum(lanes, bodies))):
+            m = self.OccupancyGrid()
+            m.header.stamp = stamp
+            m.header.frame_id = "map"
+            m.info.map_load_time = stamp
+            m.info.resolution = g["res"]
+            m.info.width, m.info.height = g["w"], g["h"]
+            m.info.origin.position.x, m.info.origin.position.y = g["ox"], g["oy"]
+            m.info.origin.orientation.w = 1.0
+            m.data = grid.ravel().tobytes()
+            self.fleet_map[i][k].publish(m)
+
+    def publish(self, t, pos, yaws, vel_b, wz):
+        self.tsim = t
+        stamp = self._stamp(t)
+        self.clock.publish(self.Clock(clock=stamp))
+        for i, (x0, y0, yaw0) in enumerate(self.starts):
+            c, s = math.cos(-yaw0), math.sin(-yaw0)
+            dx, dy = pos[i][0] - x0, pos[i][1] - y0
+            ox, oy = c * dx - s * dy, s * dx + c * dy
+            oyaw = math.atan2(math.sin(yaws[i] - yaw0), math.cos(yaws[i] - yaw0))
+            o = self.Odometry()
+            o.header.stamp = stamp
+            o.header.frame_id, o.child_frame_id = "odom", "base_link"
+            o.pose.pose.position.x, o.pose.pose.position.y = ox, oy
+            o.pose.pose.orientation.z, o.pose.pose.orientation.w = math.sin(oyaw / 2), math.cos(oyaw / 2)
+            o.twist.twist.linear.x, o.twist.twist.linear.y = vel_b[i][0], vel_b[i][1]
+            o.twist.twist.angular.z = wz[i]
+            self.odom[i].publish(o)
+            self.tf[i].publish(self.TFMessage(transforms=[self._tf("odom", "base_link", ox, oy, 0.0, oyaw, t)]))
+
+
+def safe_cmd(vx, wz):
+    vx = max(-0.3, min(0.9, vx))
+    lim = 0.8 if vx >= 0.5 else 0.6
+    return vx, max(-lim, min(lim, wz))
+
+
 def make_lidars(stage, hero_only):
     from isaacsim.sensors.experimental.rtx import Lidar, LidarSensor
     from pxr import UsdGeom
@@ -550,7 +779,8 @@ def controller(pos, yaw, wps, k, i=0, look=0.8):
     else:
         TURN[i] = 1.0 if err >= 0 else -1.0
     vx = own.speed * max(0.0, math.cos(err)) ** 2
-    wz = max(-0.8, min(0.8, 1.8 * err))
+    lim = 0.8 if vx >= 0.5 else 0.6
+    wz = max(-lim, min(lim, 1.8 * err))
     return [vx, 0.0, wz], k
 
 
@@ -577,8 +807,8 @@ def main():
         import omni.usd
 
         em = omni.kit.app.get_app().get_extension_manager()
-        exts = ["isaacsim.core.experimental.utils", "isaacsim.sensors.experimental.rtx"]
-        if own.ros:
+        exts = ["isaacsim.core.experimental.utils", "isaacsim.sensors.experimental.rtx"] if (own.lidars != "none" or own.ros) else []
+        if own.ros or own.nav:
             exts.append("isaacsim.ros2.bridge")
         for e in exts:
             em.set_extension_enabled_immediate(e, True)
@@ -660,6 +890,11 @@ def main():
         shuttle = Shuttle(stage)
         shuttle_where = []
         boxes = Boxes(u)
+        streamer = None
+        if own.stream:
+            import stream as wh_stream
+
+            streamer = wh_stream.Sender(own.stream, robot.body_names)
         rigs, sensors = ([], [])
         if own.lidars != "none":
             rigs, sensors = make_lidars(stage, own.lidars == "hero")
@@ -677,6 +912,18 @@ def main():
         rwait = [0] * N
         hero_cmd = [0.0, 0.0, 0.0]
         lf, lz = LAYOUT["lidar_forward"], LAYOUT["lidar_height"]
+        fleet = None
+        navc = [[0.0, 0.0, 0.0] for _ in range(own.nav)]
+        hold = [None] * own.nav
+        csens = u.scene.sensors.get("contact_forces") if hasattr(u.scene, "sensors") else None
+        cbody = [k for k, nm in enumerate(csens.body_names) if not nm.endswith("_foot")] if csens is not None else []
+        cnames = [csens.body_names[k] for k in cbody] if csens is not None else []
+        ctouch = [False] * N
+        contact_log = []
+        print("[wh] contact bodies", len(cbody), "of", 0 if csens is None else len(csens.body_names), flush=True)
+        if own.nav:
+            fleet = FleetRos([(r["start"][0], r["start"][1], math.radians(r["start"][2])) for r in robots[:own.nav]],
+                             (own.mount_x, own.mount_z))
         stats, t_wall0, last_t, last_wall = [], time.monotonic(), 0, time.monotonic()
         n_steps = own.steps if own.steps > 0 else 10**9
         print("[wh] running", N, "robots", flush=True)
@@ -697,14 +944,37 @@ def main():
                     recover(fallen, t, ts, pos, gz)
                     if 0 in fallen:
                         hero_cmd = [0.0, 0.0, 0.0]
+                    for i in fallen:
+                        if i < own.nav:
+                            navc[i] = [0.0, 0.0, 0.0]
+                            hold[i] = None
                     obs = env.get_observations()
                 cmds = []
                 xy = [tuple(p[:2]) for p in pos]
                 follow = [[j for j in range(N) if j != i and ahead(xy[i], yaws[i], [xy[j]], 1.3, 0.55)] for i in range(N)]
                 for i in range(N):
-                    if i == 0 and ros is not None:
+                    if fleet is not None and i < own.nav:
+                        vx, vy, wz = fleet.command(i)
+                        tvx, twz = safe_cmd(vx, wz)
+                        if abs(tvx) < 0.02 and abs(twz) < 0.02 and abs(navc[i][0]) < 0.05 and abs(navc[i][2]) < 0.05:
+                            if hold[i] is None:
+                                hold[i] = (pos[i][0], pos[i][1], yaws[i])
+                            hx, hy, hyaw = hold[i]
+                            c, s = math.cos(yaws[i]), math.sin(yaws[i])
+                            ex = c * (hx - pos[i][0]) + s * (hy - pos[i][1])
+                            ey = -s * (hx - pos[i][0]) + c * (hy - pos[i][1])
+                            eyaw = math.atan2(math.sin(hyaw - yaws[i]), math.cos(hyaw - yaws[i]))
+                            navc[i] = [max(-0.15, min(0.15, 1.0 * ex)), max(-0.15, min(0.15, 1.0 * ey)), max(-0.3, min(0.3, 1.5 * eyaw))]
+                        else:
+                            hold[i] = None
+                            navc[i][0] += 0.15 * (tvx - navc[i][0])
+                            navc[i][1] += 0.15 * (0.0 - navc[i][1])
+                            navc[i][2] += 0.15 * (twz - navc[i][2])
+                            navc[i][0], navc[i][2] = safe_cmd(navc[i][0], navc[i][2])
+                        cmds.append(list(navc[i]))
+                    elif i == 0 and ros is not None:
                         vx, vy, wz = ros.command()
-                        tgt = [max(-0.3, min(0.9, vx)), 0.0, max(-0.7, min(0.7, wz))]
+                        tgt = [max(-0.3, min(0.9, vx)), 0.0, max(-0.6, min(0.6, wz))]
                         for j in range(3):
                             hero_cmd[j] += 0.08 * (tgt[j] - hero_cmd[j])
                         cmds.append(list(hero_cmd))
@@ -718,6 +988,13 @@ def main():
                             cmd = [0.0, 0.0, 0.0]
                         cmds.append(cmd)
                 term.vel_command_b[:] = torch.tensor(cmds, device=dev)
+                if own.navlog and fleet is not None and t % 10 == 0:
+                    with open(own.navlog, "a") as nf:
+                        for i in range(own.nav):
+                            rc, rt = fleet.cmd[i]
+                            nf.write(json.dumps([round(ts, 2), i, round(pos[i][0], 2), round(pos[i][1], 2), round(math.degrees(yaws[i]), 1),
+                                                 [round(v, 2) for v in rc], round(fleet.tsim - rt, 2), [round(v, 2) for v in cmds[i]],
+                                                 hold[i] is not None, round(gz[i], 2)]) + "\n")
                 if t % 5 == 0:
                     for i in range(N):
                         trail[i].append([round(ts, 2), *(round(v, 3) for v in pos[i]), round(math.degrees(yaws[i]), 1),
@@ -735,11 +1012,45 @@ def main():
                     rop.Set(math.degrees(yaws[i]))
                 t_step = time.monotonic()
                 obs, _, dones, _ = env.step(policy(obs))
+                if streamer is not None:
+                    streamer.send(ts + dt, robot, movers, people, shuttle, SimulationManager.get_simulation_time())
                 if own.pace:
                     left = dt - (time.monotonic() - t_step)
                     if left > 0:
                         time.sleep(left)
                 policy.reset(dones)
+                if cbody and t % 2 == 0:
+                    fmag = csens.data.net_forces_w.torch[:, cbody, :].norm(dim=-1)
+                    fmax, farg = fmag.max(dim=1)
+                    hot = (fmax > own.contact_n).tolist()
+                    if any(hot):
+                        pc = robot.data.root_pos_w.torch[:, :2].tolist()
+                        for i in range(N):
+                            if hot[i] and not ctouch[i]:
+                                near = min((math.dist(pc[i], pc[j]) for j in range(N) if j != i), default=-1.0)
+                                fv = csens.data.net_forces_w.torch[i, cbody[int(farg[i])], :].tolist()
+                                ev = {"robot": i, "sim_s": round(ts, 2), "body": cnames[int(farg[i])], "force": round(float(fmax[i]), 1),
+                                      "at": [round(v, 2) for v in pc[i]], "nearest_robot_m": round(near, 2),
+                                      "f_xyz": [round(v, 1) for v in fv], "floor": bool(fv[2] > 0.9 * float(fmax[i])),
+                                      "person_m": round(min((math.dist(pc[i], q[:2]) for q in people.where), default=-1.0), 2)}
+                                contact_log.append(ev)
+                                print("[wh] contact", json.dumps(ev), flush=True)
+                                if own.contacts:
+                                    json.dump(contact_log, open(own.contacts, "w"))
+                    ctouch = hot
+                if fleet is not None and t % own.ros_every == 0:
+                    k = own.nav
+                    pn = robot.data.root_pos_w.torch[:k, :3].tolist()
+                    qn = robot.data.root_quat_w.torch[:k].tolist()
+                    yn = [math.atan2(2 * (q[3] * q[2] + q[0] * q[1]), 1 - 2 * (q[1] * q[1] + q[2] * q[2])) for q in qn]
+                    tnow = SimulationManager.get_simulation_time()
+                    fleet.publish(tnow, pn, yn,
+                                  robot.data.root_lin_vel_b.torch[:k].tolist(), robot.data.root_ang_vel_b.torch[:k, 2].tolist())
+                    if t % (2 * own.ros_every) == 0:
+                        pa = robot.data.root_pos_w.torch[:, :3].tolist()
+                        qa = robot.data.root_quat_w.torch.tolist()
+                        ya = [math.atan2(2 * (q[3] * q[2] + q[0] * q[1]), 1 - 2 * (q[1] * q[1] + q[2] * q[2])) for q in qa]
+                        fleet.publish_fleet(tnow, pa, ya, with_map=t % (10 * own.ros_every) == 0)
                 if ros is not None:
                     vb = robot.data.root_lin_vel_b.torch[0].tolist()
                     wz = robot.data.root_ang_vel_b.torch[0, 2].item()
@@ -770,6 +1081,7 @@ def main():
                           "hero": [round(v, 2) for v in pos[0]], "hero_cmd": [round(v, 2) for v in cmds[0]]}
                     st["timeline"] = [round(tl.get_current_time(), 3), tl.is_playing()]
                     st["falls"] = len(fall_log)
+                    st["contacts"] = len(contact_log)
                     if sensors:
                         try:
                             d, _ = sensors[0][1].get_data("generic-model-output")

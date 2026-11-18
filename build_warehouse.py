@@ -344,6 +344,7 @@ stage.GetRootLayer().Save()
 
 robots = [{"start": [31.4, 2.6, 90.0], "route": [[31.4, 36.0], [31.4, 3.0]], "role": "hero"}]
 COLUMN_LINES = (10.0, 20.0, 30.0)
+columns = [[x, y, 0.4, 0.4, 0.0] for x in (10.0, 20.0, 30.0, 40.0) for y in COLUMN_LINES]
 
 
 def lane(y):
@@ -385,7 +386,7 @@ for gx, gy in goals_world:
     goals_map.append([round(math.cos(yaw0) * dx + math.sin(yaw0) * dy, 3),
                       round(-math.sin(yaw0) * dx + math.cos(yaw0) * dy, 3)])
 
-layout = {"size": [W, D], "people": people, "shuttle": shuttle, "footprints": foot + walls, "aisles": aisles, "north_aisle": north_aisle, "robots": robots, "movers": movers,
+layout = {"size": [W, D], "people": people, "shuttle": shuttle, "footprints": foot + walls + columns, "aisles": aisles, "north_aisle": north_aisle, "robots": robots, "movers": movers,
           "boxes": dyn, "drop_zones": zones, "drop_batch": 24, "lidar_forward": 0.2, "lidar_height": 0.45,
           "hero_goals_map": goals_map, "hero_goals_world": goals_world}
 json.dump(layout, open(OUT.replace(".usda", "_layout.json"), "w"), indent=1)

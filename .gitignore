@@ -9,3 +9,5 @@ warehouse*_layout.json
 warehouse*_goals.json
 nav_log*.json
 nav_patrol*.log
+maps/
+local.env
